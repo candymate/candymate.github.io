@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | escape }}">
+    <meta name="theme-color" content="#f7f8fa">
+    <title>{{ page.title | escape }} · {{ page.role | escape }}</title>
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  </head>
+  <body>
+    <div class="site-layout">
+      <aside class="profile" aria-label="Profile">
+        {% if page.photo %}
+        <img class="profile-photo" src="{{ page.photo | relative_url }}" alt="{{ page.title | escape }}">
+        {% else %}
+        <div class="profile-initial" aria-hidden="true">{{ page.title | slice: 0, 1 | upcase }}</div>
+        {% endif %}
+        <h1>{{ page.title | escape }}</h1>
+        <ul class="profile-links">
+          <li><a href="mailto:{{ page.email | escape }}">Email</a></li>
+          {% for link in page.links %}<li><a href="{{ link.url | escape }}">{{ link.label | escape }}</a></li>{% endfor %}
+        </ul>
+      </aside>
+
+      <main class="content">
+        {{ content }}
+        <p class="cv-download"><a href="{{ '/assets/cv.pdf' | relative_url }}" download>Download CV (PDF)</a></p>
+      </main>
+    </div>
+    <footer class="site-footer">© {{ site.time | date: '%Y' }} {{ page.title | escape }} · Powered by Jekyll</footer>
+  </body>
+</html>
